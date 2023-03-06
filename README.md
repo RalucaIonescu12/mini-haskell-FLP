@@ -1,1 +1,1 @@
-# mini-haskell-FLP
+# mini-haskell
