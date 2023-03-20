@@ -1,2 +1,10 @@
 .stack-work/
+<<<<<<< Updated upstream
 *~
+=======
+cabal.project.local
+cabal.project.local~
+.HTF/
+history.txt
+.ghc.environment.*
+>>>>>>> Stashed changes

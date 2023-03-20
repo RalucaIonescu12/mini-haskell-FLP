@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 # Changelog for `mini-haskell`
+=======
+# Changelog for `miniHaskell`
+>>>>>>> Stashed changes
 
 All notable changes to this project will be documented in this file.
 

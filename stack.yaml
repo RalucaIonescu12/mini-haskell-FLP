@@ -51,6 +51,7 @@ packages:
 # Control whether we use the GHC we find on the path
 # system-ghc: true
 #
+<<<<<<< Updated upstream
 # Require a specific version of stack, using version ranges
 # require-stack-version: -any # Default
 # require-stack-version: ">=2.9"
@@ -60,6 +61,17 @@ packages:
 # arch: x86_64
 #
 # Extra directories used by stack for building
+=======
+# Require a specific version of Stack, using version ranges
+# require-stack-version: -any # Default
+# require-stack-version: ">=2.9"
+#
+# Override the architecture used by Stack, especially useful on Windows
+# arch: i386
+# arch: x86_64
+#
+# Extra directories used by Stack for building
+>>>>>>> Stashed changes
 # extra-include-dirs: [/path/to/dir]
 # extra-lib-dirs: [/path/to/dir]
 #

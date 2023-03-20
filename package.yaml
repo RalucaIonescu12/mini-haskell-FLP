@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 name:                mini-haskell
 version:             0.1.0.0
 github:              "githubuser/mini-haskell"
+=======
+name:                miniHaskell
+version:             0.1.0.0
+github:              "githubuser/miniHaskell"
+>>>>>>> Stashed changes
 license:             BSD3
 author:              "Author name here"
 maintainer:          "example@example.com"
@@ -17,10 +23,19 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
+<<<<<<< Updated upstream
 description:         Please see the README on GitHub at <https://github.com/githubuser/mini-haskell#readme>
 
 dependencies:
 - base >= 4.7 && < 5
+=======
+description:         Please see the README on GitHub at <https://github.com/githubuser/miniHaskell#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- parsec
+- isocline
+>>>>>>> Stashed changes
 
 ghc-options:
 - -Wall
@@ -37,7 +52,11 @@ library:
   source-dirs: src
 
 executables:
+<<<<<<< Updated upstream
   mini-haskell-exe:
+=======
+  miniHaskell-exe:
+>>>>>>> Stashed changes
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -45,10 +64,17 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+<<<<<<< Updated upstream
     - mini-haskell
 
 tests:
   mini-haskell-test:
+=======
+    - miniHaskell
+
+tests:
+  miniHaskell-test:
+>>>>>>> Stashed changes
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -56,4 +82,8 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
+<<<<<<< Updated upstream
     - mini-haskell
+=======
+    - miniHaskell
+>>>>>>> Stashed changes
