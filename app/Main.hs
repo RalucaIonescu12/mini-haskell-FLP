@@ -1,11 +1,3 @@
-<<<<<<< Updated upstream
-module Main (main) where
-
-import Lib
-
-main :: IO ()
-main = someFunc
-=======
 
 module Main where
 
@@ -14,6 +6,8 @@ import System.Console.Isocline
 
 import Exp
 import Parsing
+import Sugar
+import Eval
 import Printing
 import REPLCommand
 import Text.ParserCombinators.Parsec(parse)
@@ -32,5 +26,3 @@ main = do
                         Right c -> putStrLn ( showExp c ) >> main
                         
 
-
->>>>>>> Stashed changes
