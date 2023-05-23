@@ -18,95 +18,99 @@ falseElim :: False -> b                             -- false elimination
 falseElim f = getFalse f 
 
 implIntro :: (a -> b) -> (a -> b)                   -- implication introduction
-implIntro = undefined
+implIntro f x = f x
 
 implElim :: (a -> b) -> a -> b                      -- implication elimination
-implElim = undefined
+implElim f x = f x
 
 andIntro :: a -> b -> And a b                       -- and introduction
-andIntro = undefined
+andIntro x y = And (\f -> f x y)
 
 andElimL :: And a b -> a                            -- and elimination 1
-andElimL = undefined
+andElimL (And f) = f (\x _ -> x)
 
 andElimR :: And a b -> b                            -- and elimination 2
-andElimR = undefined
+andElimR (And f) = f (\_ y -> y)
 
 orIntroL :: a -> Or a b                             -- or introduction 1
-orIntroL = undefined
+orIntroL x = Or (\f _ -> f x)
 
 orIntroR :: b -> Or a b                             -- or introduction 2
-orIntroR = undefined
+orIntroR y = Or (\_ f -> f y)
 
 orElim :: Or a b -> (a -> c) -> (b -> c) -> c       -- or elimination
-orElim = undefined
+orElim (Or f) g h = f g h
 
 notElim :: Not p -> p -> c                          -- not elimination 
-notElim = undefined
+notElim f x = case f x of
 
 notIntro :: (forall p. a -> p) -> Not a             -- not introduction
-notIntro _ = undefined
+notIntro f x = case f x of
 
 iffIntro :: (a -> b) -> (b -> a) -> Iff a b         -- iff introduction
-iffIntro = undefined
+iffIntro f g = And (\x -> f x) (\y -> g y)
 
 iffElimL :: Iff a b -> a -> b                       -- iff elimination 1
-iffElimL = undefined
+iffElimL (And f _) x = f x
 
 iffElimR :: Iff a b -> b -> a                       -- iff elimination 1
-iffElimR = undefined
+iffElimR (And _ g) y = g y
 
 -- Hilbert-style axiomatization for intuitionistic propositional logic
 
 ax1 :: a -> b -> a
-ax1 = undefined
+ax1 x _ = x
 
 ax2 :: (a -> b) -> (a -> (b -> c)) -> a -> c
-ax2 = undefined
+ax2 f g x = g x (f x)
 
 ax3 :: a -> b -> And a b
-ax3 = undefined
+ax3 x y = And (\f -> f x y)
 
 ax4 :: And a b -> a
-ax4 = undefined
+ax4 (And f) = f (\x _ -> x)
 
 ax5 :: And a b -> b
-ax5 = undefined
+ax5 (And f) = f (\_ y -> y)
 
 ax6 :: a -> Or a b
-ax6 = undefined
+ax6 x = Or (\f _ -> f x)
 
 ax7 :: b -> Or a b
-ax7 = undefined
+ax7 y = Or (\_ f -> f y)
 
 ax8 :: (a -> c) -> (b -> c) -> Or a b -> c
-ax8 = undefined
+ax8 f g (Or h1 h2) = h1 f `orElim` g
 
 ax9 :: (a -> b) -> (a -> Not b) -> Not a
-ax9 = undefined
+ax9 f g x = g x (f x)
 
 ax10 :: Not a -> a -> b
-ax10 = undefined
+ax10 f x = case f x of
 
 modusPonens :: (a -> b) -> a -> b
-modusPonens = undefined
+modusPonens f x = f x
 
 -- Several tautologies
 
 pNPFalse :: p -> Not p -> False
-pNPFalse = undefined
+pNPFalse x f = f x
 
 deMorgan1 :: And (Not p) (Not q) -> Not (Or p q)
-deMorgan1 = undefined
+deMorgan1 (And f) = \case
+  Or g h -> f g `notElim` h
 
 deMorgan2 :: Not (Or p q) -> And (Not p) (Not q)
-deMorgan2 = undefined
+deMorgan2 f = And (\x -> f (Or x (\_ -> undefined))) (\y -> f (Or (\_ -> undefined) y))
 
 deMorgan3 :: Or (Not p) (Not q) -> Not (And p q)
-deMorgan3 = undefined
+deMorgan3 = \case
+  Or f g -> \case
+    And x y -> f x `notElim` g y
 
 excludedMiddleImplDoubleNeg :: Or a (Not a) -> (Not (Not a) -> a)
-excludedMiddleImplDoubleNeg = undefined
+excludedMiddleImplDoubleNeg = \case
+  Or x _ -> \f -> x `notElim` f
 
 doubleNegImplExcludedMiddle :: (forall a. Not (Not a) -> a) -> Or b (Not b)
-doubleNegImplExcludedMiddle dn = undefined
+doubleNegImplExcludedMiddle dn = Or (\x -> dn (\f -> x `notElim` f)) (\_ -> undefined)
